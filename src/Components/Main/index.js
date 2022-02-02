@@ -1,4 +1,4 @@
-import Container from './style'
+import Container from './styles'
 import plus from './images/plus.svg'
 import minus from './images/minus.svg'
 import logout from './images/logout.svg'
