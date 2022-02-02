@@ -8,8 +8,8 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     h1{
+        font-family: 'Saira Stencil One', cursive;
         font-style: normal;
         font-weight: normal;
         font-size: 32px;
@@ -25,6 +25,7 @@ const Container = styled.div`
         border-radius: 5px;
         margin-top: 13px;
 
+        font-family: 'Raleway', sans-serif;
         font-style: normal;
         font-weight: normal;
         font-size: 20px;
@@ -39,20 +40,23 @@ const Container = styled.div`
         border-radius: 5px;
         margin-top: 13px;
 
+        font-family: 'Raleway', sans-serif;
         font-style: normal;
         font-weight: bold;
         font-size: 20px;
         line-height: 23px;
         color: #FFFFFF;
     }
-    p{
+    a{
         margin-top: 36px;
 
+        font-family: 'Raleway', sans-serif;
         font-style: normal;
         font-weight: bold;
         font-size: 15px;
         line-height: 18px;
         color: #FFFFFF;
+        text-decoration: none
     }
 `
 
