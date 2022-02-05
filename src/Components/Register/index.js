@@ -13,7 +13,7 @@ export default function Register(){
 
     const navigate = useNavigate()
 
-    function handleRegsiter(e){
+    function handleRegister(e){
         e.preventDefault()
         if(form.password === form.confirm){
             delete form.confirm
@@ -21,7 +21,7 @@ export default function Register(){
             promisse.then(() => navigate('/') )
             promisse.catch(erro => {
                 console.log(erro)
-                alert(erro)
+                alert(erro.response.data)
             })
         }
         else{
@@ -36,7 +36,7 @@ export default function Register(){
     return(
         <Container>
             <h1>MyWallet</h1>
-            <form onSubmit={handleRegsiter}>
+            <form onSubmit={handleRegister}>
                 <input type="text" name='name' required value={form.name} placeholder="Nome" onChange={handleOnChange} />
                 <input type="email" name='email' required value={form.email} placeholder="E-mail" onChange={handleOnChange} />
                 <input type="password" name='password' required value={form.password} placeholder="Senha" onChange={handleOnChange} />
