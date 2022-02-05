@@ -9,7 +9,7 @@ import UserContext from "./contexts/UserContext"
 
 
 export default function App(){
-    const [token, setToken] = useState(null)
+    const [token, setToken] = useState(localStorage.getItem("token"))
     const [type, setType] = useState('')
 
     return(
