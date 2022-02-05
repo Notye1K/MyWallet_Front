@@ -19,38 +19,43 @@ const Container = styled.div`
         line-height: 31px;
         color: #FFFFFF;
     }
-    input{
-        margin-bottom: 13px;
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        input{
+            margin-bottom: 13px;
 
-        width: 326px;
-        height: 58px;
-        padding-left: 15px;
-        border: none;
-        border-radius: 5px;
+            width: 326px;
+            height: 58px;
+            padding-left: 15px;
+            border: none;
+            border-radius: 5px;
 
-        background: #FFFFFF;
+            background: #FFFFFF;
 
-        font-family: 'Raleway', sans-serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 20px;
-        line-height: 23px;
-        color: #000000;
-    }
-    button{
-        width: 326px;
-        height: 46px;
-        border: none;
-        border-radius: 5px;
+            font-family: 'Raleway', sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 20px;
+            line-height: 23px;
+            color: #000000;
+        }
+        button{
+            width: 326px;
+            height: 46px;
+            border: none;
+            border-radius: 5px;
 
-        background: #A328D6;
+            background: #A328D6;
 
-        font-family: 'Raleway', sans-serif;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 20px;
-        line-height: 23px;
-        color: #FFFFFF;
+            font-family: 'Raleway', sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 23px;
+            color: #FFFFFF;
+        }
     }
 `
 

@@ -10,14 +10,16 @@ import UserContext from "./contexts/UserContext"
 
 export default function App(){
     const [token, setToken] = useState(null)
+    const [type, setType] = useState('')
+
     return(
         <UserContext.Provider value={{ token, setToken }}>
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<Login/>} />
                     <Route path='/register' element={<Register />} />
-                    <Route path='/main' element={<Main />} />
-                    <Route path='/movement' element={<Movement />} />
+                    <Route path='/main' element={<Main setType={setType} />} />
+                    <Route path='/movement' element={<Movement type={type} />} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>

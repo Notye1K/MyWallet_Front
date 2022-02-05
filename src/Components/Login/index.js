@@ -19,8 +19,8 @@ export default function Login(){
         e.preventDefault()
         const promisse = axios.post('http://localhost:5000/login', form)
         promisse.then(response => {
-            navigate('/main')
             setToken(response.data)
+            navigate('/main')
         })
         promisse.catch(erro => {
             console.log(erro.response.data)
