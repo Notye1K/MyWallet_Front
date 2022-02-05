@@ -2,6 +2,7 @@ import Container from "./styles"
 
 export default function Movement({type}){
     type = 'saida'
+    // if type undefined navigate main
     return(
         <Container>
             <h1>Nova {type}</h1>

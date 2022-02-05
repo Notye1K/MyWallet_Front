@@ -16,36 +16,43 @@ const Container = styled.div`
         line-height: 50px;
         color: #FFFFFF;
     }
-    input{
-        width: 326px;
-        height: 58px;
-        background: #FFFFFF;
-        padding-left: 15px;
-        border: none;
-        border-radius: 5px;
-        margin-top: 13px;
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        input{
+            width: 326px;
+            height: 58px;
+            background: #FFFFFF;
+            padding-left: 15px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 13px;
 
-        font-family: 'Raleway', sans-serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 20px;
-        line-height: 23px;
-        color: #000000;
-    }
-    button{
-        width: 326px;
-        height: 46px;
-        background: #A328D6;
-        border: none;
-        border-radius: 5px;
-        margin-top: 13px;
+            font-family: 'Raleway', sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 20px;
+            line-height: 23px;
+            color: #000000;
+        }
+    
+        button{
+            width: 326px;
+            height: 46px;
+            background: #A328D6;
+            border: none;
+            border-radius: 5px;
+            margin-top: 13px;
 
-        font-family: 'Raleway', sans-serif;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 20px;
-        line-height: 23px;
-        color: #FFFFFF;
+            font-family: 'Raleway', sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 23px;
+            color: #FFFFFF;
+        }
     }
     a{
         margin-top: 36px;
