@@ -56,6 +56,11 @@ const Container = styled.div`
 
                 color: #C6C6C6;
             }
+            button{
+                border: none;
+                background-color: white;
+                color: #C6C6C6;
+            }
         }
         .total{
             display: flex;

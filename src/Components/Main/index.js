@@ -8,11 +8,15 @@ import {useContext, useEffect, useState} from 'react'
 import UserContext from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
 
+let tokenGlobal
+
 export default function Main({setType}){
     const {token} = useContext(UserContext)
+    tokenGlobal = token
 
     const [name, setName] = useState('')
     const [trasactions, setTrasactions] = useState([])
+    const [refresh, setRefresh] = useState(true)
 
     const navigate = useNavigate()
 
@@ -27,7 +31,7 @@ export default function Main({setType}){
             alert(erro.response.data)
             navigate('/')
         })
-    },[token, navigate])
+    },[token, navigate, refresh])
 
     let total = 0
     trasactions?.map(v => total += parseInt(v.value))
@@ -44,7 +48,7 @@ export default function Main({setType}){
             <main className={!trasactions ? 'empty' : ''}>
                 <div className="lines">
                     {!trasactions ? 'Não há registros de entrada ou saída' : 
-                    trasactions.map((v) => <Trasactions key={v.id} datas={v} />)}
+                        trasactions.map((v) => <Trasactions refresh={refresh} setRefresh={setRefresh} key={v.id} datas={v} />)}
                 </div>
                 {trasactions && <div className="total"><span className='bold'>Saldo</span><span className={total < 0 ? 'negative' : 'positive'}>{total}</span></div>}
             </main>
@@ -68,11 +72,28 @@ export default function Main({setType}){
     )
 }
 
-function Trasactions({datas}){
+function Trasactions({ datas, setRefresh, refresh}){
     return(
         <div className='line'>
             <div><span className='date'>{datas.time}</span>{datas.description}</div>
-            <span className={datas.value<0 ? 'negative' : 'positive'}>{parseInt(datas.value.replace('-','')).toFixed(2)}</span>
+            <span className={datas.value<0 ? 'negative' : 'positive'}>
+                {parseFloat(datas.value.replace('-','')).toFixed(2)}
+                <button onClick={() => handleDelete(datas.id, setRefresh, refresh, datas.description)}>x</button>
+            </span>
         </div>
     )
+}
+
+function handleDelete(id, setRefresh, refresh, description) {
+    if(!window.confirm(`Tem certeza que deseja excluir "${description}"?`)){
+        return
+    }
+    const promisse = axios.delete(`http://localhost:5000/movements?transactionId=${id}`, { headers: { Authorization: `Bearer ${tokenGlobal}` }})
+    promisse.then(() => {
+        setRefresh(!refresh)
+    })
+    promisse.catch(erro => {
+        console.log(erro.response.data);
+        alert(erro.response.data)
+    })
 }
