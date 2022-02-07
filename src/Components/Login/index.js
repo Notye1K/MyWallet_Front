@@ -5,7 +5,7 @@ import axios from 'axios'
 import UserContext from "../../contexts/UserContext"
 
 
-export default function Login(){
+export default function Login() {
     const [form, setForm] = useState({
         email: '',
         password: ''
@@ -32,12 +32,24 @@ export default function Login(){
     function handleOnChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
-    return(
+    return (
         <Container>
             <h1>MyWallet</h1>
             <form onSubmit={handleLogin}>
-                <input type="email" required name='email' value={form.email} onChange={handleOnChange} placeholder="E-mail" />
-                <input type="password" required name='password' value={form.password} onChange={handleOnChange} placeholder="Senha" />
+                <input type="email"
+                    required
+                    name='email'
+                    value={form.email}
+                    onChange={handleOnChange}
+                    placeholder="E-mail"
+                />
+                <input type="password"
+                    required
+                    name='password'
+                    value={form.password}
+                    onChange={handleOnChange}
+                    placeholder="Senha"
+                />
                 <button>Entrar</button>
             </form>
             <Link to='/register' >Primeira vez? Cadastre-se!</Link>

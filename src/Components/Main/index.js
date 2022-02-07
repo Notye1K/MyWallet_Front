@@ -4,14 +4,14 @@ import minus from './images/minus.svg'
 import logout from './images/logout.svg'
 
 import axios from 'axios'
-import {useContext, useEffect, useState} from 'react'
+import { useContext, useEffect, useState } from 'react'
 import UserContext from '../../contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
 
 let tokenGlobal
 
-export default function Main({setType}){
-    const {token} = useContext(UserContext)
+export default function Main({ setType, setIsEdit, setId, setFormToEdit }) {
+    const { token } = useContext(UserContext)
     tokenGlobal = token
 
     const [name, setName] = useState('')
@@ -31,13 +31,13 @@ export default function Main({setType}){
             alert(erro.response.data)
             navigate('/')
         })
-    },[token, navigate, refresh])
+    }, [token, navigate, refresh])
 
     let total = 0
     trasactions?.map(v => total += parseInt(v.value))
     total = total.toFixed(2)
 
-    return(
+    return (
         <Container>
             <header>
                 <h1>Olá, {name}</h1>
@@ -47,21 +47,48 @@ export default function Main({setType}){
             </header>
             <main className={!trasactions ? 'empty' : ''}>
                 <div className="lines">
-                    {!trasactions ? 'Não há registros de entrada ou saída' : 
-                        trasactions.map((v) => <Trasactions refresh={refresh} setRefresh={setRefresh} key={v.id} datas={v} />)}
+                    {!trasactions ? 'Não há registros de entrada ou saída' :
+                        trasactions.map((v) => <Trasactions
+                            refresh={refresh}
+                            setRefresh={setRefresh}
+                            key={v.id}
+                            datas={v}
+                            setType={setType}
+                            setIsEdit={setIsEdit}
+                            setId={setId}
+                            navigate={navigate}
+                            setFormToEdit={setFormToEdit}
+                        />)}
                 </div>
-                {trasactions && <div className="total"><span className='bold'>Saldo</span><span className={total < 0 ? 'negative' : 'positive'}>{total}</span></div>}
+                {trasactions && <div className="total">
+                    <span className='bold'>
+                        Saldo
+                    </span>
+                    <span className={total < 0 ? 'negative' : 'positive'}>
+                        {total}
+                    </span>
+                </div>}
             </main>
             <footer className='buttons'>
                 <button onClick={() => {
+                    setIsEdit(0)
                     setType('entrada')
+                    setFormToEdit({
+                        description: '',
+                        value: ''
+                    })
                     navigate('/movement')
                 }}>
                     <img src={plus} alt="plus" />
                     <p>Nova <br /> entrada</p>
                 </button>
                 <button onClick={() => {
+                    setIsEdit(0)
                     setType('saida')
+                    setFormToEdit({
+                        description: '',
+                        value: ''
+                    })
                     navigate('/movement')
                 }}>
                     <img src={minus} alt="minus" />
@@ -72,12 +99,25 @@ export default function Main({setType}){
     )
 }
 
-function Trasactions({ datas, setRefresh, refresh}){
-    return(
+function Trasactions({ datas, setRefresh, refresh, setIsEdit, setType, setId, navigate, setFormToEdit }) {
+    return (
         <div className='line'>
-            <div><span className='date'>{datas.time}</span>{datas.description}</div>
-            <span className={datas.value<0 ? 'negative' : 'positive'}>
-                {parseFloat(datas.value.replace('-','')).toFixed(2)}
+            <div onClick={() => {
+                setIsEdit(1)
+                setId(datas.id)
+                setFormToEdit({
+                    description: datas.description,
+                    value: datas.value
+                })
+                if (datas.value > 0) {
+                    setType('entrada')
+                } else {
+                    setType('saida')
+                }
+                navigate('/movement')
+            }}><span className='date'>{datas.time}</span>{datas.description}</div>
+            <span className={datas.value < 0 ? 'negative' : 'positive'}>
+                {parseFloat(datas.value.replace('-', '')).toFixed(2)}
                 <button onClick={() => handleDelete(datas.id, setRefresh, refresh, datas.description)}>x</button>
             </span>
         </div>
@@ -85,10 +125,14 @@ function Trasactions({ datas, setRefresh, refresh}){
 }
 
 function handleDelete(id, setRefresh, refresh, description) {
-    if(!window.confirm(`Tem certeza que deseja excluir "${description}"?`)){
+    if (!window.confirm(`Tem certeza que deseja excluir "${description}"?`)) {
         return
     }
-    const promisse = axios.delete(`http://localhost:5000/movements?transactionId=${id}`, { headers: { Authorization: `Bearer ${tokenGlobal}` }})
+    const promisse = axios.delete(`http://localhost:5000/movements?transactionId=${id}`, {
+        headers: {
+            Authorization: `Bearer ${tokenGlobal}`
+        }
+    })
     promisse.then(() => {
         setRefresh(!refresh)
     })

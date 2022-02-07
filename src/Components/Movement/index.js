@@ -4,27 +4,35 @@ import { useNavigate } from "react-router-dom"
 import UserContext from "../../contexts/UserContext"
 import Container from "./styles"
 
-export default function Movement({type}){
+export default function Movement({ type, isEdit, id, formToEdit, setFormToEdit }) {
     const navigate = useNavigate()
 
-    const [form, setForm] = useState({
-        description: '',
-        value: ''
-    })
+    const { token } = useContext(UserContext)
 
-    const {token} = useContext(UserContext)
-
-    if(type === ''){
+    if (type === '') {
         navigate('/')
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-        let formNegative = {...form}
-        if(type==='saida' && form.value>0){
-            formNegative = {...form, value: new String (form.value*-1)}
+        let formNegative = { ...formToEdit }
+        if (type === 'saida' && formToEdit.value > 0) {
+            formNegative = { ...formToEdit, value: new String(formToEdit.value * -1) }
         }
-        const promisse = axios.post('http://localhost:5000/movements', formNegative, { headers: { Authorization: `Bearer ${token}` } })
+        let promisse
+        if (isEdit === 0) {
+            promisse = axios.post('http://localhost:5000/movements', formNegative, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        } else {
+            promisse = axios.put(`http://localhost:5000/movements?transactionId=${id}`, formNegative, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        }
         promisse.then(() => {
             navigate('/main')
         })
@@ -35,16 +43,28 @@ export default function Movement({type}){
     }
 
     function handleOnChange(e) {
-        setForm({ ...form, [e.target.name]: e.target.value })
+        setFormToEdit({ ...formToEdit, [e.target.name]: e.target.value })
     }
 
-    return(
+    return (
         <Container>
-            <h1>Nova {type}</h1>
+            <h1>{isEdit === 0 ? 'Nova' : 'Editar'} {type}</h1>
             <form onSubmit={handleSubmit}>
-                <input type="number" required name='value' value={form.value} onChange={handleOnChange} placeholder="Valor"/>
-                <input type="text" required name='description' value={form.description} onChange={handleOnChange} placeholder="Descrição"/>
-                <button> Salvar {type}</button>
+                <input type="number"
+                    required
+                    name='value'
+                    value={formToEdit.value}
+                    onChange={handleOnChange}
+                    placeholder="Valor"
+                />
+                <input type="text"
+                    required
+                    name='description'
+                    value={formToEdit.description}
+                    onChange={handleOnChange}
+                    placeholder="Descrição"
+                />
+                <button> {isEdit === 0 ? 'Salvar' : 'Atualizar'} {type}</button>
             </form>
         </Container>
     )
