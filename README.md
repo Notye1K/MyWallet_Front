@@ -23,3 +23,14 @@ By using this app any user can learn how they've been using their money and alwa
 The following tools and frameworks were used in the construction of the project:
 
 react; create-react-app; styled-components; axios; react-router-dom;
+
+## How to run
+
+1. Clone this repository
+2. Install dependencies
+
+`npm i`
+
+3. Open it
+
+`npm run start`
