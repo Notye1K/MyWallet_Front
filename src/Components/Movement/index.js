@@ -21,13 +21,13 @@ export default function Movement({ type, isEdit, id, formToEdit, setFormToEdit }
         }
         let promisse
         if (isEdit === 0) {
-            promisse = axios.post('http://localhost:5000/movements', formNegative, {
+            promisse = axios.post('https://back--my-wallet.herokuapp.com/movements', formNegative, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
         } else {
-            promisse = axios.put(`http://localhost:5000/movements?transactionId=${id}`, formNegative, {
+            promisse = axios.put(`https://back--my-wallet.herokuapp.com/movements?transactionId=${id}`, formNegative, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

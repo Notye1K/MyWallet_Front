@@ -128,7 +128,7 @@ function handleDelete(id, setRefresh, refresh, description) {
     if (!window.confirm(`Tem certeza que deseja excluir "${description}"?`)) {
         return
     }
-    const promisse = axios.delete(`http://localhost:5000/movements?transactionId=${id}`, {
+    const promisse = axios.delete(`https://back--my-wallet.herokuapp.com/movements?transactionId=${id}`, {
         headers: {
             Authorization: `Bearer ${tokenGlobal}`
         }

@@ -17,7 +17,7 @@ export default function Register() {
         e.preventDefault()
         if (form.password === form.confirm) {
             delete form.confirm
-            const promisse = axios.post('http://localhost:5000/register', form)
+            const promisse = axios.post('https://back--my-wallet.herokuapp.com/register', form)
             promisse.then(() => navigate('/'))
             promisse.catch(erro => {
                 console.log(erro)
