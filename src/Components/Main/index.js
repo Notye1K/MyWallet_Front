@@ -21,7 +21,7 @@ export default function Main({ setType, setIsEdit, setId, setFormToEdit }) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const promisse = axios.get('http://localhost:5000/account', { headers: { Authorization: `Bearer ${token}` } })
+        const promisse = axios.get('https://back--my-wallet.herokuapp.com/account', { headers: { Authorization: `Bearer ${token}` } })
         promisse.then(response => {
             setName(response.data.name)
             setTrasactions(response.data.movements)
