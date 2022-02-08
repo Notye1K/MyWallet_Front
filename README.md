@@ -17,3 +17,9 @@ This is an web application with which lots of people can manage their own expens
 * Delete events
 
 By using this app any user can learn how they've been using their money and always keep track of your balance.
+
+## Technologies
+
+The following tools and frameworks were used in the construction of the project:
+
+react; create-react-app; styled-components; axios; react-router-dom;
