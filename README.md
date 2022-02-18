@@ -4,6 +4,8 @@ An easy to use financial manager. Track your revenues and expenses to learn how 
 
 Try it out now at https://front-my-wallet-ten.vercel.app/
 
+Back-end repository at https://github.com/Notye1K/MyWallet_Back
+
 ## About
 
 This is an web application with which lots of people can manage their own expenses and revenues. Below are the implemented features:
