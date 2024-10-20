@@ -4,7 +4,7 @@ An easy to use financial manager. Track your revenues and expenses to learn how 
 
 ![myWallet](https://user-images.githubusercontent.com/71580986/154872480-6b0ac370-25ee-4cc6-b388-f56643e5a806.gif)
 
-Try it out now at https://front-my-wallet-ten.vercel.app/
+Try it out now at https://front-my-wallet-ten.vercel.app/  -- backend offline! :(
 
 Back-end repository at https://github.com/Notye1K/MyWallet_Back
 
